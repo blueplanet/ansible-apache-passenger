@@ -1,0 +1,29 @@
+- name: add EPEL
+  shell: creates=/etc/yum.repos.d/epel.repo rpm -Uvh --replacepkgs http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+- name: install basic packages
+  yum: name={{ item }} state=installed
+  with_items:
+    - git
+    - curl
+    - wget
+    - ruby-devel
+    - readline-devel
+    - ncurses-devel
+    - gdbm-devel
+    - openssl-devel
+    - libxslt-devel
+    - mysql-devel
+    - libyaml
+    - libyaml-devel
+    - gcc
+    - libxml2
+    - libxml2-devel
+    - libxslt
+
+- name: install Development Tool
+  sudo: true
+  shell: yum -y groupinstall "Development Tools"
+
+- name: set timezone
+  file: src=/usr/share/zoneinfo/Asia/Tokyo dest=/etc/localtime state=link force=yes
