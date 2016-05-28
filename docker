@@ -1,0 +1,5 @@
+[servers]
+ansible_test
+
+[docker:children]
+servers
